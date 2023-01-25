@@ -18,11 +18,11 @@ def desabilita_botoes():
 
 
 def jogar_novamente():
-    janela.hit.setEnabled(True)
-    janela.enviar.setEnabled(True)
-    global erros, numero_aleatorio
+    janela.hit.setEnabled(True)  # Desabilita o spinbox
+    janela.enviar.setEnabled(True)  # Desabilita o botão enviar
+    global erros, numero_aleatorio  # Chama as variáves que serão redefinidas posteriormente.
     erros = 3
-    numero_aleatorio = define_numero_aleatorio()
+    numero_aleatorio = define_numero_aleatorio()  # Novo número aleatório
 
 
 def verifica_vitoria():
@@ -32,10 +32,10 @@ def verifica_vitoria():
         janela.acertos.setText("Parabéns, você ganhou!")
         janela.dica.setText("")
         desabilita_botoes()
-    else:
+    else:  # Se estiver errado, diminui a quantidade de tentativas que o jogador tem.
         erros -= 1
         janela.acertos.setText(f"Você errou. Tentativas restantes {erros}")
-        if erros == 0:
+        if erros == 0:  # Se chegar a zero uma mensagem é mostrada perguntando se quer jogar novamente.
             janela.acertos.setText("")
             desabilita_botoes()
             janela.dica.setText("")
@@ -45,7 +45,8 @@ def verifica_vitoria():
             else:
                 janela.close()
         else:
-            if hit < numero_aleatorio:
+            if hit < numero_aleatorio:  # Dica simples, dizendo se o palpite foi menor ou maior do que o escolhido
+                # pelo programa.
                 janela.dica.setText("Você deve escolher um número maior!")
             else:
                 janela.dica.setText("Você deve escolher um número menor!")
@@ -54,10 +55,11 @@ def verifica_vitoria():
 # Iniciar o aplicativo
 app = QtWidgets.QApplication([])
 janela = uic.loadUi('guess_window.ui')  # Inicia a janela
-janela.hit.setRange(1, 50)  # Define um intervalo de número a serem escolhidos.
+janela.hit.setRange(1, 50)  # Define um intervalo de número a serem escolhidos na spinbox.
 janela.hit.clear()  # Deixa a spinbox vazia
 
-janela.enviar.clicked.connect(verifica_vitoria)  # Valida se acertou ou não
+janela.enviar.clicked.connect(verifica_vitoria)  # Ao clicar no botão enviar, chama a função que verificará se acertou
+# ou não.
 
-janela.show()
-app.exec()
+janela.show()  # Mostra a janela
+app.exec()  # Executa o app
