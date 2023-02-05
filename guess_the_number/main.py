@@ -20,6 +20,7 @@ def desabilita_botoes():
 def jogar_novamente():
     janela.hit.setEnabled(True)  # Desabilita o spinbox
     janela.enviar.setEnabled(True)  # Desabilita o botão enviar
+    janela.hit.clear()
     global erros, numero_aleatorio  # Chama as variáves que serão redefinidas posteriormente.
     erros = 3
     numero_aleatorio = define_numero_aleatorio()  # Novo número aleatório
