@@ -2,8 +2,9 @@ import time
 from PyQt5 import uic, QtWidgets
 import pyautogui
 from PyQt5.QtWidgets import QMessageBox
+import keyboard
 
-global p1, p2
+global p1, p2, clique
 
 
 def mostra_posicao1():
@@ -26,10 +27,12 @@ def iniciar():  # Faz a inicialização do processo de cliques
         QMessageBox.information(janela, "Atenção", "Necessário informar o número de vezes para clicar\n"
                                                    "e também salvar as posições")
     else:
+        global clique
         clique = 0
         time.sleep(2)
         # pyautogui.hotkey("alt", "tab")
         while clique < int(janela.qnt.text()):
+            print(clique)
             clique += 1
             time.sleep(0.08)
             pyautogui.moveTo(p1[0], p1[1])
@@ -37,6 +40,9 @@ def iniciar():  # Faz a inicialização do processo de cliques
             time.sleep(0.08)
             pyautogui.moveTo(p2[0], p2[1])
             pyautogui.click(p2[0], p2[1])
+            # if keyboard.is_pressed("s"):
+            #     print("s was pressed")
+            #     break
 
 
 app = QtWidgets.QApplication([])
@@ -48,6 +54,7 @@ janela.iniciar.clicked.connect(iniciar)
 janela.b1.setShortcut("1")
 janela.b2.setShortcut("2")
 janela.iniciar.setShortcut('enter')
+
 
 janela.show()
 app.exec()
