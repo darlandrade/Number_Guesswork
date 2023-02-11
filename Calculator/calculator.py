@@ -122,7 +122,7 @@ def times():
 def equals():
     if janela.result.text():
         calculo = eval(janela.result.text() + janela.entered.text())
-
+        
         janela.result.setText(str(calculo))
     else:
         QMessageBox.information(janela, "Campo em branco", "Não há nada para ser calculado")
